@@ -8,11 +8,9 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 
 Configure secure remote access for a new machine using the proven stack: **Tailscale + OpenSSH + Wake-on-LAN**.
 
-The user's reference setup (working as of 2026-05-24):
-- Chromebook (client) → SSH → Windows PC (target) via Tailscale
-- Raspberry Pi always-on → Wake-on-LAN → wakes Windows PC
-- Tailscale account: gluca.3d@gmail.com
-- Reference guide: `D:\LAVORO_REMOTO\chromebook_config.md`
+Typical topology:
+- Always-on device (Raspberry Pi, NAS, old PC) → sends WoL magic packet → wakes target
+- Client (laptop, Chromebook) → SSH over Tailscale → target machine
 
 ---
 
@@ -22,7 +20,7 @@ Ask the user:
 1. **Target machine OS** — Windows, Linux (which distro), macOS?
 2. **Client machine** — where they'll connect from (Chromebook, Linux, Windows, macOS)?
 3. **WoL needed?** — Is there an always-on device (Pi, NAS, old PC) that can send magic packets?
-4. **Tailscale account** — same account as existing devices, or new one?
+4. **Tailscale account** — same account as existing devices, or a new one?
 
 If the target is Windows, jump to the Windows section. If Linux/macOS, jump to the appropriate section.
 
@@ -169,7 +167,7 @@ wakeonlan AA:BB:CC:DD:EE:FF
 ## Tailscale Setup (all platforms)
 
 1. Install from tailscale.com (one command on Linux: `curl -fsSL https://tailscale.com/install.sh | sh`)
-2. `sudo tailscale up` → opens browser for auth → log in with gluca.3d@gmail.com
+2. `sudo tailscale up` → opens browser for auth → log in with your Tailscale account
 3. Verify: `tailscale ip -4` → note the 100.x.x.x address
 
 Check all devices are visible: `tailscale status`
@@ -203,13 +201,13 @@ Test: `ssh <alias>`
 - [ ] MAC address noted for wake scripts
 - [ ] `~/wake-<machinename>.sh` script tested end-to-end
 - [ ] `~/.ssh/config` entry added on client
-- [ ] Guide saved to `D:\LAVORO_REMOTO\<machinename>_remote_setup.md`
+- [ ] Reference guide saved locally with IPs, MAC, key paths, and quirks
 
 ---
 
 ## Save a Guide
 
-At the end, save a machine-specific reference file to `D:\LAVORO_REMOTO\<machinename>_remote_setup.md` with:
+At the end, save a machine-specific reference file (e.g., `<machinename>_remote_setup.md`) with:
 - Tailscale IP
 - MAC address
 - SSH alias and key path
