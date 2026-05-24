@@ -48,6 +48,10 @@ Then in any Claude Code session:
 | [wakeonlan](https://github.com/jpoliv/wakeonlan) | Send magic packets from the always-on device |
 | [ethtool](https://man7.org/linux/man-pages/man8/ethtool.8.html) | Enable WoL on Linux NICs at boot |
 
+## Part of
+
+[giandemoncell-prog/claude-skills](https://github.com/giandemoncell-prog/claude-skills) — collection of all Claude Code skills.
+
 ## License
 
 MIT
